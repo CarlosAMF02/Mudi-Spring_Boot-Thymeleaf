@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+
+  <div th:each="order: ${orders}">
+    <div th:text="${order.getProductName()}">Nome do Produto</div>
+    <div>Valor: <span th:text="${order.getDealValue()}"></span></div>
+    <div>Data da Entrega: <span th:text="${order.getDeliveryDate()}"></span></div>
+
+    <div>Produto</div>
+    <div>
+      <input th:value="${order.getProductUrl()}" value="Url do Produto" />
+    </div>
+
+    <div>Descrição</div>
+    <div>
+      <textarea th:text="${order.getDescription()}">descricao do pedido</textarea>
+    </div>
+    
+    <div>
+      <img th:src="${order.getImageUrl()}" src="" alt="Imagem do produto"/>
+    </div>
+  </div>
+
+</body>
+</html>
