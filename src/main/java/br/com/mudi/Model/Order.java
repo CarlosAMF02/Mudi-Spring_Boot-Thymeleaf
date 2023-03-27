@@ -1,16 +1,32 @@
 package br.com.mudi.Model;
 
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
+@Entity
+@Table(name = "T_MUDI_ORDER")
 public class Order {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String productName;
     private BigDecimal dealValue;
     private LocalDate deliveryDate;
+    @Column(length = 4096)
     private String productUrl;
     private String imageUrl;
     private String description;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getProductName() {
         return productName;
