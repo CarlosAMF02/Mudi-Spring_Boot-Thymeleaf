@@ -1,5 +1,6 @@
 package br.com.mudi.Model;
 
+import br.com.mudi.DTO.OrderDTO;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -18,7 +19,6 @@ public class Order {
     private String productUrl;
     private String imageUrl;
     private String description;
-
 
     public Long getId() {
         return id;
