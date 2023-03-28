@@ -1,11 +1,17 @@
 package br.com.mudi.DTO;
 
 import br.com.mudi.Model.Order;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class OrderDTO {
-
+    @NotBlank(message = "O campo url do produto é obrigatório!")
+    @Size(min = 2, max = 50, message = "O campo deve conter entre 2 e 50 caracteres!")
     private String productName;
+    @NotBlank(message = "O campo url do produto é obrigatório!")
     private String productUrl;
+    @NotBlank(message = "O campo url da imagem do produto é obrigatório!")
     private String imageUrl;
     private String description;
 
