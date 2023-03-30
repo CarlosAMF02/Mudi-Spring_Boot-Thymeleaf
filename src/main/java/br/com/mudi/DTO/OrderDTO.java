@@ -1,6 +1,7 @@
 package br.com.mudi.DTO;
 
 import br.com.mudi.Model.Order;
+import br.com.mudi.Model.Status;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -21,6 +22,7 @@ public class OrderDTO {
         order.setImageUrl(orderDTO.getImageUrl());
         order.setProductUrl(orderDTO.getProductUrl());
         order.setDescription(orderDTO.getDescription());
+        order.setStatus(Status.AGUARDANDO);
 
         return order;
     }

@@ -19,6 +19,8 @@ public class Order {
     private String productUrl;
     private String imageUrl;
     private String description;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     public Long getId() {
         return id;
@@ -74,5 +76,13 @@ public class Order {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }
