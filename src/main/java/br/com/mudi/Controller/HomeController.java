@@ -48,6 +48,6 @@ public class HomeController {
     }
     @ExceptionHandler(IllegalArgumentException.class)
     public String onArgumentException() {
-        return "redirect:/home";
+        return "forward:/home";
     }
 }

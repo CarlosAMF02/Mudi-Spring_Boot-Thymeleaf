@@ -24,8 +24,8 @@
       <div class="card-body row">
         <div class="col-12 col-sm-8 mb-3">
           <div class="row">
-            <div class="col-md-5">Valor: <span th:text="${order.getDealValue()}"></span></div>
-            <div class="col-md-7">Data da Entrega: <span th:text="${order.getDeliveryDate()}"></span></div>
+            <div class="col-md-5">Valor: <span th:if="${order.getDealValue()}" th:text="${'R$ ' + #numbers.formatDecimal(order.getDealValue(), 3, 'POINT', 2, 'COMMA')}"></span></div>
+            <div class="col-md-7">Data da Entrega: <span th:text="${#temporals.format(order.getDeliveryDate(), 'dd/MM/yyyy')}"></span></div>
           </div>
 
           <div>Produto</div>
