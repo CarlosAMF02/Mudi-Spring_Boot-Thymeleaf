@@ -8,12 +8,12 @@
     <div th:replace="~{base :: title(text='Meus Pedidos')}"></div>
     <nav class="navbar navbar-expand navbar-light bg-light p-3 d-flex justify-content-between mb-3">
       <div class="navbar-nav">
-        <a th:classappend="${status} ? '' : 'active'" class="nav-link" href="/home">Todos</a>
-        <a th:classappend="${status} == 'aguardando' ? 'active' : ''" class="nav-link" href="/home/aguardando">Aguardando</a>
-        <a th:classappend="${status} == 'aprovado' ? 'active' : ''" class="nav-link" href="/home/aprovado">Aprovado</a>
-        <a th:classappend="${status} == 'entregue' ? 'active' : ''" class="nav-link" href="/home/entregue">Entregue</a>
+        <a th:classappend="${status} ? '' : 'active'" class="nav-link" th:href="@{/user/order}">Todos</a>
+        <a th:classappend="${status} == 'aguardando' ? 'active' : ''" class="nav-link" th:href="@{/user/order/aguardando}">Aguardando</a>
+        <a th:classappend="${status} == 'aprovado' ? 'active' : ''" class="nav-link" th:href="@{/user/order/aprovado}">Aprovado</a>
+        <a th:classappend="${status} == 'entregue' ? 'active' : ''" class="nav-link" th:href="@{/user/order/entregue}">Entregue</a>
       </div>
-      <a href="/order/form"><button class="btn btn-outline-secondary" type="submit">Novo</button></a>
+      <a th:href="@{/order/form}"><button class="btn btn-outline-secondary" type="submit">Novo</button></a>
     </nav>
     <div class="card mt-3" th:each="order: ${orders}">
       <th:block th:switch="${order.getStatus().name()}">
