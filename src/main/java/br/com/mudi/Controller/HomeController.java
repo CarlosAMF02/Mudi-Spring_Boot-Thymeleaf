@@ -23,7 +23,7 @@ public class HomeController {
 
         List<Order> orders = orderRepository.findAllByUser(principal.getName());
 
-        ModelAndView mv = new ModelAndView("user/home");
+        ModelAndView mv = new ModelAndView("user/order");
 
         mv.addObject("orders", orders);
 
