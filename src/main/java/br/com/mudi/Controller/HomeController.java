@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -21,9 +22,9 @@ public class HomeController {
     private OrderRepository orderRepository;
 
     @GetMapping
-    public ModelAndView home() {
+    public ModelAndView home(Principal principal) {
 
-        List<Order> orders = orderRepository.findAll();
+        List<Order> orders = orderRepository.findAllByUser(principal.getName());
 
         ModelAndView mv = new ModelAndView("home");
 

@@ -1,6 +1,5 @@
 package br.com.mudi.Model;
 
-import br.com.mudi.DTO.OrderDTO;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -21,6 +20,9 @@ public class Order {
     private String description;
     @Enumerated(EnumType.STRING)
     private Status status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     public Long getId() {
         return id;
@@ -84,5 +86,13 @@ public class Order {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
