@@ -1,6 +1,7 @@
 package br.com.mudi.Controller;
 
 import br.com.mudi.Model.Order;
+import br.com.mudi.Model.Status;
 import br.com.mudi.Repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,9 +22,9 @@ public class HomeController {
     @GetMapping
     public ModelAndView home(Principal principal) {
 
-        List<Order> orders = orderRepository.findAllByUser(principal.getName());
+        List<Order> orders = orderRepository.findByStatus(Status.ENTREGUE);
 
-        ModelAndView mv = new ModelAndView("user/order");
+        ModelAndView mv = new ModelAndView("home");
 
         mv.addObject("orders", orders);
 
