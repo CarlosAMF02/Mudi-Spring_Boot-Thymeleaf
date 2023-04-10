@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
+
 @Entity
 @Table(name = "T_MUDI_ORDER")
 public class Order {
@@ -25,6 +27,9 @@ public class Order {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
     private User user;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
+    private List<Offer> offers;
 
     public Long getId() {
         return id;
@@ -96,5 +101,13 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<Offer> offers) {
+        this.offers = offers;
     }
 }
