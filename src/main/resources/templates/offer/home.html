@@ -37,20 +37,23 @@
 <script>
     function onLoad() {
         var app = new Vue({
-         el: '#offers',
+            el: '#offers',
             data: {
-                orders: [
-                    {"id":1,"productName":"Bicicleta Trek","dealValue":null,"deliveryDate":"2023-04-07","productUrl":"https://www.amazon.com.br/Bicicleta-SPACELINE-C%C3%A2mbio-Shimano-Preto-Cinza/dp/B091B1GXRB/ref=asc_df_B091B1GXRB/?tag=googleshopp00-20&linkCode=df0&hvadid=395139869934&hvpos=&hvnetw=g&hvrand=5815051066708411831&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1001773&hvtargid=pla-1231866162185&psc=1","imageUrl":"https://trek.scene7.com/is/image/TrekBicycleProducts/Marlin8_21_34649_A_Primary?$responsive-pjpg$&cache=on,on&wid=800&hei=600","description":"Bicicletas Trek","status":"ENTREGUE"},
-                    {"id":2,"productName":"Samsung S32","dealValue":200.00,"deliveryDate":"2023-03-30","productUrl":"https://fastshop-vendas.myshopify.com/products/smartphone-samsung-galaxy-s22-ultra-256gb-5g-wi-fi-tela-6-8-dual-chip-12gb-ram-camera-quadrupla-selfie-40mp-preto?currency=BRL&variant=44877109821750&utm_medium=cpc&utm_source=google&utm_campaign=Google%20Shopping&gclid=CjwKCAjw_YShBhAiEiwAMomsEDS-7csaq4MWZsHd4h62IogBhnNrYS9ffKCBhX1Wg_LTmpxkUbdEABoCjLYQAvD_BwE","imageUrl":"https://i.zst.com.br/thumbs/12/3e/3a/-796868387.jpg","description":"Samsung S22 modelo Ultra","status":"ENTREGUE"},
-                    {"id":21,"productName":"Samsung S32","dealValue":null,"deliveryDate":null,"productUrl":"https://fastshop-vendas.myshopify.com/products/smartphone-samsung-galaxy-s22-ultra-256gb-5g-wi-fi-tela-6-8-dual-chip-12gb-ram-camera-quadrupla-selfie-40mp-preto?currency=BRL&variant=44877109821750&utm_medium=cpc&utm_source=google&utm_campaign=Google%20Shopping&gclid=CjwKCAjw_YShBhAiEiwAMomsEDS-7csaq4MWZsHd4h62IogBhnNrYS9ffKCBhX1Wg_LTmpxkUbdEABoCjLYQAvD_BwE","imageUrl":"https://i.zst.com.br/thumbs/12/3e/3a/-796868387.jpg","description":"dsadsa","status":"AGUARDANDO"},
-                    {"id":22,"productName":"Samsung S32","dealValue":null,"deliveryDate":null,"productUrl":"https://fastshop-vendas.myshopify.com/products/smartphone-samsung-galaxy-s22-ultra-256gb-5g-wi-fi-tela-6-8-dual-chip-12gb-ram-camera-quadrupla-selfie-40mp-preto?currency=BRL&variant=44877109821750&utm_medium=cpc&utm_source=google&utm_campaign=Google%20Shopping&gclid=CjwKCAjw_YShBhAiEiwAMomsEDS-7csaq4MWZsHd4h62IogBhnNrYS9ffKCBhX1Wg_LTmpxkUbdEABoCjLYQAvD_BwE","imageUrl":"https://i.zst.com.br/thumbs/12/3e/3a/-796868387.jpg","description":"Novo S9895483","status":"AGUARDANDO"}]
+                orders: []
+            },
+            mounted () {
+                axios
+                    .get('http://localhost:8080/api/order/aguardando')
+                    .then(response => (this.orders = response.data) )
             }
-        });
+
+        })
     }
 
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
