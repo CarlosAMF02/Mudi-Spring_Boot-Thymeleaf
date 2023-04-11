@@ -19,8 +19,14 @@
                     <p class="form-control">{{ order.description }}</p>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-5">Valor: <input v-model="order.offerValue" /> </div>
-                    <div class="col-md-7">Data da Entrega: <input v-model="order.deliveryDate"/> </div>
+                    <div class="col-md-5">
+                        <p>Valor: <input v-bind:class="{'is-invalid':order.errorList.deliveryDate!==''}" v-model="order.offerValue" /> </p>
+                        <div v-if="order.errorList.value" class="invalid-feedback">{{order.errorList['value']}}</div>
+                    </div>
+                    <div class="col-md-7">
+                        <p> Data da Entrega: <input v-bind:class="{'is-invalid':order.errorList.deliveryDate!==''}" v-model="order.deliveryDate"/> </p>
+                        <div v-if="order.errorList.deliveryDate" class="invalid-feedback">{{order.errorList.deliveryDate}}</div>
+                    </div>
                 </div>
                 <div class="mt-2">
                     <label for="comment">Comentário</label>
@@ -49,7 +55,13 @@
                     .get('http://localhost:8080/api/order/aguardando')
                     .then(response => {
                         this.orders = response.data
-                        this.orders.forEach(order => order.sendedOffer = false)
+                        this.orders.forEach(order => {
+                            order.sendedOffer = false
+                            order.errorList = {
+                                value: '',
+                                deliveryDate: ''
+                            }
+                        })
                     } )
             },
             methods: {
@@ -62,7 +74,13 @@
                             deliveryDate: order.deliveryDate,
                             comment: order.comment
                         })
-                        .then(response => this.switchSendButton(order));
+                        .then(response => this.switchSendButton(order))
+                        .catch(error => {
+                            error.response.data.errors.forEach(error => {
+                                order.errorList[error.field] = error.defaultMessage;
+                            })
+                            console.log(order)
+                        });
                 },
                 switchSendButton: function (order) {
                     const button = document.querySelector(`#sendButton${order.id}`)

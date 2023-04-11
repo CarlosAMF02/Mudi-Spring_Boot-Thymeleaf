@@ -1,6 +1,8 @@
 package br.com.mudi.DTO;
 
 import br.com.mudi.Model.Offer;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -8,9 +10,12 @@ import java.time.format.DateTimeFormatter;
 
 public class OfferDTO {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
     private Long orderId;
+    @NotNull(message = "O campo de valor é obrigatório")
+    @Pattern(regexp = "^\\d+(\\.\\d{2})?$", message = "O campo de valor deve estar no formato 0.00")
     private String value;
+    @NotNull(message = "O campo de data de entrega é obrigatório")
+    @Pattern(regexp = "^\\d{2}/\\d{2}/\\d{4}", message = "O formato da data de entrega deve ser dd/MM/aaaa")
     private String deliveryDate;
     private String comment;
 
