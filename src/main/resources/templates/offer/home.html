@@ -9,21 +9,24 @@
     <div class="card mt-3" v-for="order in orders">
         <div class="card-header alert alert-dark">{{ order.productName }}</div>
         <div class="card-body row">
-            <div class="col-12 col-sm-8 mb-3">
-                <div class="row">
-                    <div class="col-md-5">Valor: <input /> </div>
-                    <div class="col-md-7">Data da Entrega: <input /> </div>
-                </div>
-
-                <div>Produto</div>
+            <div class="col-12 col-sm-8">
                 <div>
-                    <a v-bind:href="order.productUrl">{{order.productName}}</a>
+                    <p>Produto <a v-bind:href="order.productUrl">{{order.productName}}</a></p>
                 </div>
 
-                <div>Descrição</div>
+                <div class="mt-3">Descrição</div>
                 <div>
                     <p class="form-control">{{ order.description }}</p>
                 </div>
+                <div class="row mt-3">
+                    <div class="col-md-5">Valor: <input v-model="order.offerValue" /> </div>
+                    <div class="col-md-7">Data da Entrega: <input v-model="order.deliveryDate"/> </div>
+                </div>
+                <div class="mt-2">
+                    <label for="comment">Comentário</label>
+                    <textarea id="comment" class="form-control" v-model="order.comment"></textarea>
+                </div>
+                <button v-bind:id="'sendButton'+order.id" v-on:click="sendOffer(order)" class="btn btn-primary mt-3" type="submit">Enviar Oferta</button>
             </div>
             <div class="col-12 col-sm-4">
                 <div>
@@ -44,7 +47,37 @@
             mounted () {
                 axios
                     .get('http://localhost:8080/api/order/aguardando')
-                    .then(response => (this.orders = response.data) )
+                    .then(response => {
+                        this.orders = response.data
+                        this.orders.forEach(order => order.sendedOffer = false)
+                    } )
+            },
+            methods: {
+                sendOffer: function (order) {
+
+                    axios
+                        .post('http://localhost:8080/api/offers', {
+                            orderId: order.id,
+                            value: order.offerValue,
+                            deliveryDate: order.deliveryDate,
+                            comment: order.comment
+                        })
+                        .then(response => this.switchSendButton(order));
+                },
+                switchSendButton: function (order) {
+                    const button = document.querySelector(`#sendButton${order.id}`)
+                    const oldText = button.innerHTML;
+                    const oldClass = 'btn-primary';
+                    const newClass = 'btn-success';
+                    const delay = 7500;
+                    this.switchClassText(button, oldClass, newClass, 'Oferta Enviada')
+                    setTimeout(() => this.switchClassText(button, newClass, oldClass, oldText), delay)
+                },
+                switchClassText: function (element, removableClassName, addClassName, newText) {
+                    element.classList.remove(removableClassName)
+                    element.classList.add(addClassName)
+                    element.innerHTML=newText
+                }
             }
 
         })
