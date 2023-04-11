@@ -1,5 +1,6 @@
 package br.com.mudi.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -15,6 +16,7 @@ public class Offer {
     private LocalDate deliveryDate;
     private String comment;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private Order order;
 
     public Offer() {

@@ -1,6 +1,7 @@
 package br.com.mudi.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -29,6 +30,7 @@ public class Order {
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Offer> offers;
 
     public Long getId() {
