@@ -6,6 +6,7 @@ import br.com.mudi.Model.Order;
 import br.com.mudi.Repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +19,7 @@ public class OffersRest {
     private OrderRepository orderRepository;
 
     @PostMapping
-    public Offer generateOffer(OfferDTO offerDTO) {
+    public Offer generateOffer(@RequestBody OfferDTO offerDTO) {
         Optional<Order> order = orderRepository.findById(offerDTO.getOrderId());
         if(order.isEmpty()) {
             return null;
